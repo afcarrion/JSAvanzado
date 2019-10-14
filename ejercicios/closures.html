@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scope</title>
+</head>
+<body>
+    <a href="/ejercicios/">Go Back</a>
+    <p><em>Abre la consola</em></p>
+
+    <script>
+        //closures
+        //printColor
+        //1. llamamos una funcion que se invoca inmediatamente IIFE
+        (function(){
+            let color = 'green';
+    
+            function printColor(){
+                console.log(color);
+            }
+            printColor();
+        })();
+        //*****Funciones que regresan funciones*******
+        /* function makeColorPrinter(color){
+            let colorMessage = `The color  is ${color}`;
+            return function(){
+                console.log(colorMessage)
+            }
+        }
+
+        let greenColorPrinter = makeColorPrinter('green');
+        console.log(greenColorPrinter()); */
+
+        //*****Variables  Privadas *******
+        /* const counter = {
+            count:3
+        };
+        console.log(counter.count); */
+
+        function MakeCounter(n){
+            let count = n;
+
+            return {
+                increase: function (){
+                    count = count + 1;
+                },
+                decrease: function (){
+                    count = count - 1;
+                },
+                getCount: function (){
+                    return count;
+                }
+            }
+        }
+
+        let counter = MakeCounter(7);
+        console.log('The count is: ', counter.getCount());
+        counter.decrease();
+        console.log('The count is: ', counter.getCount());
+        counter.increase();
+        console.log('The count is: ', counter.getCount());
+
+    </script>
+</body>
+</html>

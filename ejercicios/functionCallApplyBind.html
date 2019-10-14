@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Call Apply Bind</title>
+</head>
+<body>
+    <a href="/ejercicios/">Go Back</a>
+    <p><em>Abre la consola</em></p>
+
+    <ul>
+        <li><button class="call-to-action">Aprender</button></li>
+        <li><button class="call-to-action">Aprender Mas</button></li>
+        <li><button class="call-to-action">Nunca parar de aprender</button></li>
+    </ul>
+
+    <script>
+        function saludar(){
+            console.log(`Hola. Soy ${this.name} ${this.apellido}`);
+        }
+
+        const richard = {
+            name: 'Richard',
+            apellido: 'Kaufman Lopez',
+        };
+
+        saludar.call(richard);
+
+        //Establece 'this' usando 'call' y pasar argmentos a la funcion 
+
+        function caminar(metros, direccion){
+            console.log(`${this.name} camina ${metros} metros hacia el ${direccion} `);
+        }
+
+        caminar.call(richard, 400, "norte");
+
+        //Establece 'this' usando 'apply' y pasar argumentos a la funcion
+        //caminar.apply(richard, [800, "sur"]); esto es lo mismo que :
+        const valores = [800, 'sur'];
+        caminar.apply(richard, valores);
+
+        //Establecer 'this' en una nueva funcion usando bind
+        const daniel = {name: "Daniel", apellido: "Sanchez"};
+        const danielSaluda = saludar.bind(daniel);
+        danielSaluda();
+
+        const danielCamina = caminar.bind(daniel);
+        danielCamina(1000,'Este');
+        //o podria escribirse de la siguiente manera: 
+        //const danielCamina = caminar.bind(daniel,1000,'Este');
+        //danielCamina();
+
+        //Cuando es util utilizar uno de esos metodos.
+        const buttons = document.getElementsByClassName('call-to-action');
+
+        //NodeList
+        Array.prototype.forEach.call(buttons, button => {
+            button.onclick = () => alert('Nunca pares de aprender');
+        });
+        
+    </script>
+</body>
+</html>
